@@ -12,7 +12,7 @@ from dictionary_words import read_in_txtfile, convert_to_list
 def histogram(source_text):
     histogram_dict = {}
     for word in source_text:
-        if word not in histogram_dict:
+        if histogram_dict.get(word) is None:
             histogram_dict[word] = 1
         else:
             histogram_dict[word] += 1
@@ -42,7 +42,6 @@ def main():
 
     number_of_unique_words = unique_words(my_histogram)
     print("Number of unique words: {}".format(number_of_unique_words))
-
 
     word = "The"
     word_count = frequency(word, my_histogram)

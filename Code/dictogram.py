@@ -21,9 +21,22 @@ class Dictogram(dict):
         """Increase frequency count of given word by given count amount."""
         # TODO: Increase word frequency by count
 
+        if self.get(word) == None:
+            self[word] = count
+            self.types += 1
+        else:
+            self[word] += count
+
+        self.tokens += count
+
+
     def frequency(self, word):
         """Return frequency count of given word, or 0 if word is not found."""
         # TODO: Retrieve word frequency count
+        if self.get(word) is not None:
+            return self.get(word)
+        else:
+            return 0
 
 
 def print_histogram(word_list):

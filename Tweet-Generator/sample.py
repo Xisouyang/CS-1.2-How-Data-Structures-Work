@@ -17,7 +17,7 @@ def get_sample(storage_list):
     sample_list = {}
 
     for word in storage_list:
-        if word not in sample_list:
+        if sample_list.get(word) is None:
             sample_list[word] = 1
         else:
             sample_list[word] += 1
@@ -70,10 +70,6 @@ def main():
 
     test_uniform_randomness(my_histogram)
     test_weighted_randomness(my_histogram)
-
-
-
-
 
 if __name__ == '__main__':
     main()
