@@ -73,6 +73,8 @@ class LinkedList(object):
         # TODO: Append node after tail, if it exists
 
         new_node = Node(item)
+        if new_node.data == None:
+            return
 
         if self.head == None:
             self.head = new_node
@@ -91,6 +93,9 @@ class LinkedList(object):
         # TODO: Prepend node before head, if it exists
 
         new_node = Node(item)
+        if new_node.data == None:
+            return
+
         if self.head == None:
             self.head = new_node
         else:
@@ -98,6 +103,9 @@ class LinkedList(object):
             new_node.next = self.head
             self.head = new_node
 
+            while node.next != None:
+                node = node.next
+            self.tail = node
 
     def find(self, quality):
         """Return an item from this linked list satisfying the given quality.
@@ -105,6 +113,14 @@ class LinkedList(object):
         TODO: Worst case running time: O(???) Why and under what conditions?"""
         # TODO: Loop through all nodes to find item where quality(item) is True
         # TODO: Check if node's data satisfies given quality function
+
+        node = self.head
+        while node.next != None:
+            item = node.data
+            if quality(item) == True:
+                return node.data
+            node = node.next
+
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
@@ -133,6 +149,8 @@ def test_linked_list():
     another = ['D']
     ll.prepend(another[0])
     print('list: {}'.format(ll))
+    print('head: {}'.format(ll.head))
+    print('tail: {}'.format(ll.tail))
     print('length: {}'.format(ll.length()))
 
 
