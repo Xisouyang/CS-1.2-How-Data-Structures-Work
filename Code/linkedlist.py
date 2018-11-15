@@ -78,13 +78,13 @@ class LinkedList(object):
 
         if self.head == None:
             self.head = new_node
-            print(self.head)
+            self.tail = new_node
         else:
             node = self.head
             while node.next != None:
                 node = node.next
             node.next = new_node
-            self.tail = node.next
+            self.tail = new_node
 
     def prepend(self, item):
         """Insert the given item at the head of this linked list.
@@ -98,14 +98,15 @@ class LinkedList(object):
 
         if self.head == None:
             self.head = new_node
+            self.tail = new_node
         else:
             node = self.head
             new_node.next = self.head
             self.head = new_node
 
-            while node.next != None:
-                node = node.next
-            self.tail = node
+            # while node.next != None:
+            #     node = node.next
+            # self.tail = node
 
     def find(self, quality):
         """Return an item from this linked list satisfying the given quality.
@@ -115,12 +116,12 @@ class LinkedList(object):
         # TODO: Check if node's data satisfies given quality function
 
         node = self.head
-        while node.next != None:
+        while node != None:
             item = node.data
             if quality(item) == True:
-                return node.data
+                return item
             node = node.next
-
+        return None
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
@@ -152,8 +153,6 @@ def test_linked_list():
     print('head: {}'.format(ll.head))
     print('tail: {}'.format(ll.tail))
     print('length: {}'.format(ll.length()))
-
-
 
     # Enable this after implementing delete method
     delete_implemented = False
