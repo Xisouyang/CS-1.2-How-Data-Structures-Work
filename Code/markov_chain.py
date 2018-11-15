@@ -31,6 +31,8 @@ def make_histogram_dict(txt_list):
     return histogram_dict
 
 def random_walk(histogram_dict, txt_list):
+    '''returns a random key inside the dictionary of histograms,
+    and a random word that follows that random key based on weight'''
     rand_string = ""
     random_word = random.choice(list(histogram_dict))
     rand_string = rand_string + random_word + " "
@@ -47,9 +49,12 @@ def main():
     my_histogram_dict = make_histogram_dict(txt_list)
     print(my_histogram_dict)
 
-    test_string = random_walk(my_histogram_dict, txt_list)
-    print(test_string)
+    full_string = ""
 
+    for i in range(20):
+        test_string = random_walk(my_histogram_dict, txt_list)
+        full_string += test_string
+    print(full_string)
 
 
 if __name__ == '__main__':
