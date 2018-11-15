@@ -19,6 +19,7 @@ class LinkedList(object):
         """Initialize this linked list and append the given items, if any."""
         self.head = None  # First node
         self.tail = None  # Last node
+
         # Append given items
         if items is not None:
             for item in items:
@@ -56,6 +57,14 @@ class LinkedList(object):
         """Return the length of this linked list by traversing its nodes.
         TODO: Running time: O(???) Why and under what conditions?"""
         # TODO: Loop through all nodes and count one for each
+        length = 0
+        node = self.head
+
+        while node is not None:
+            print(length)
+            length += 1
+            node = node.next
+        return length
 
     def append(self, item):
         """Insert the given item at the tail of this linked list.
@@ -63,11 +72,32 @@ class LinkedList(object):
         # TODO: Create new node to hold given item
         # TODO: Append node after tail, if it exists
 
+        new_node = Node(item)
+
+        if self.head == None:
+            self.head = new_node
+            print(self.head)
+        else:
+            node = self.head
+            while node.next != None:
+                node = node.next
+            node.next = new_node
+            self.tail = node.next
+
     def prepend(self, item):
         """Insert the given item at the head of this linked list.
         TODO: Running time: O(???) Why and under what conditions?"""
         # TODO: Create new node to hold given item
         # TODO: Prepend node before head, if it exists
+
+        new_node = Node(item)
+        if self.head == None:
+            self.head = new_node
+        else:
+            node = self.head
+            new_node.next = self.head
+            self.head = new_node
+
 
     def find(self, quality):
         """Return an item from this linked list satisfying the given quality.
@@ -99,6 +129,13 @@ def test_linked_list():
     print('head: {}'.format(ll.head))
     print('tail: {}'.format(ll.tail))
     print('length: {}'.format(ll.length()))
+
+    another = ['D']
+    ll.prepend(another[0])
+    print('list: {}'.format(ll))
+    print('length: {}'.format(ll.length()))
+
+
 
     # Enable this after implementing delete method
     delete_implemented = False
