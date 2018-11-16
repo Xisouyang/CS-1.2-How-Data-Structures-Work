@@ -19,6 +19,7 @@ class LinkedList(object):
         """Initialize this linked list and append the given items, if any."""
         self.head = None  # First node
         self.tail = None  # Last node
+        self.size = 0     # Keep track of size of linked-list
 
         # Append given items
         if items is not None:
@@ -57,14 +58,16 @@ class LinkedList(object):
         """Return the length of this linked list by traversing its nodes.
         TODO: Running time: O(???) Why and under what conditions?"""
         # TODO: Loop through all nodes and count one for each
-        length = 0
-        node = self.head
 
-        while node is not None:
-            print(length)
-            length += 1
-            node = node.next
-        return length
+        return self.size            # Returns the length of linked-list(size == length)
+
+        # length = 0                # initialize variable to store length
+        # node = self.head          # Start at the head of linked-list(just accessing our list)
+        # while node is not None:   # Iterate through the nodes of the linked-list
+        #     length += 1           # increment length
+        #     node = node.next      # go to next node
+        # return length             # Return the length of the list
+        # return self.size          # Same^
 
     def append(self, item):
         """Insert the given item at the tail of this linked list.
@@ -72,19 +75,23 @@ class LinkedList(object):
         # TODO: Create new node to hold given item
         # TODO: Append node after tail, if it exists
 
-        new_node = Node(item)
-        if new_node.data == None:
-            return
+        assert item is not None         # Checks to see if item exists
+        new_node = Node(item)           # Creates the item
 
-        if self.head == None:
-            self.head = new_node
-            self.tail = new_node
+        if self.is_empty():             # if the linked-list is empty
+            self.head = new_node        # set new node as head
+            self.tail = new_node        # new node is also the tail if its the first item in list
         else:
-            node = self.head
-            while node.next != None:
-                node = node.next
-            node.next = new_node
-            self.tail = new_node
+            # node = self.head          # Access linked-list through the head
+            # while node.next != None:  # Checks for empty list
+            #     node = node.next      # go to next node in list
+            # node.next = new_node      # insert new node
+            # self.tail = new_node      # set tail to the new end of the list
+
+            self.tail.next = new_node   # insert new node at end of the list
+            self.tail = new_node        # set tail as the end of the list
+        self.size += 1                  # increment size each time new node is added to list
+
 
     def prepend(self, item):
         """Insert the given item at the head of this linked list.
@@ -92,21 +99,17 @@ class LinkedList(object):
         # TODO: Create new node to hold given item
         # TODO: Prepend node before head, if it exists
 
-        new_node = Node(item)
-        if new_node.data == None:
-            return
+        assert item is not None         # Checks for existing item
+        new_node = Node(item)           # Create new node
 
-        if self.head == None:
-            self.head = new_node
-            self.tail = new_node
+        if self.is_empty():             # if our list is empty
+            self.head = new_node        # new node is start of our list
+            self.tail = new_node        # if list is empty first item is also the tail
         else:
-            node = self.head
-            new_node.next = self.head
-            self.head = new_node
+            new_node.next = self.head   # prepend new node to list
+            self.head = new_node        # set head to the new front of list
 
-            # while node.next != None:
-            #     node = node.next
-            # self.tail = node
+        self.size += 1                  # increment size
 
     def find(self, quality):
         """Return an item from this linked list satisfying the given quality.
@@ -115,13 +118,13 @@ class LinkedList(object):
         # TODO: Loop through all nodes to find item where quality(item) is True
         # TODO: Check if node's data satisfies given quality function
 
-        node = self.head
-        while node != None:
-            item = node.data
-            if quality(item) == True:
-                return item
-            node = node.next
-        return None
+        node = self.head                # Access linked-list through the head
+        while node != None:             # Iterate through list
+            item = node.data            # Assign node data to a variable
+            if quality(item) == True:   # Checks to see if node data matches with desired item
+                return item             # If true return item
+            node = node.next            # If not move on to next node
+        return None                     # If item not in list return none
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
