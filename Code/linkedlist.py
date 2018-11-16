@@ -135,6 +135,45 @@ class LinkedList(object):
         # TODO: Otherwise raise error to tell user that delete has failed
         # Hint: raise ValueError('Item not found: {}'.format(item))
 
+        try:
+            if self.size == 1:
+                self.head = None
+                self.tail = None
+                self.size -= 1
+                return
+
+            prev_node = self.head
+            curr_node = prev_node.next
+
+            if prev_node.data == item:
+                self.head = prev_node.next
+                self.size -= 1
+                return
+
+            while curr_node.data != item:
+                prev_node = curr_node
+                curr_node = curr_node.next
+
+            if curr_node == self.tail:
+                prev_node.next = None
+                self.tail = prev_node
+                self.size -= 1
+                return
+
+            tmp_node = curr_node.next
+            prev_node.next = tmp_node
+            self.size -= 1
+        except ValueError:
+            print("Item not found: {}.".format(item))
+
+
+
+
+
+
+
+
+
 
 def test_linked_list():
     ll = LinkedList()
@@ -158,7 +197,7 @@ def test_linked_list():
     print('length: {}'.format(ll.length()))
 
     # Enable this after implementing delete method
-    delete_implemented = False
+    delete_implemented = True
     if delete_implemented:
         print('\nTesting delete:')
         for item in ['B', 'C', 'A']:
