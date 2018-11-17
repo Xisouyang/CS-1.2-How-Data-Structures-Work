@@ -135,40 +135,38 @@ class LinkedList(object):
         # TODO: Otherwise raise error to tell user that delete has failed
         # Hint: raise ValueError('Item not found: {}'.format(item))
 
-        if self.is_empty():
+        if self.is_empty():                         # Checks to see if linked-list is empty
             raise ValueError("Item not found: {}.".format(item))
 
-        if self.size == 1:
+        if self.size == 1:                              # Checks to see if there's only one node in list
+            # delete that single node from list, update length
             self.head = None
             self.tail = None
             self.size -= 1
-            return
+            return True
 
-        prev_node = self.head
-        curr_node = prev_node.next
+        prev_node = None                                # initialize a pointer to the node before the current
+        curr_node = self.head                           # initialize pointer to the head to access the linked-list
 
-        if prev_node.data == item:
-            self.head = prev_node.next
-            self.size -= 1
-            return
+        while curr_node:                                # Iterate through the linked-list
+            if curr_node.data == item:                  # If the item is found
+                if curr_node == self.tail:              # Check to see if the data is associated w/ the last node
+                    prev_node.next = None               # discard the node w/ that data
+                    self.tail = prev_node               # reset tail to point to the new last node
+                    self.size -= 1                      # update length of the linked-list
+                    return True                         # Yes we deleted successfully
+                if prev_node:                           # If the node associated w/ data is somewhere in the middle
+                    prev_node.next = curr_node.next     # discard node w/ data by switching pointers
+                    self.size -= 1                      # update size
+                else:                                   # node w/ data is the head
+                    self.head = curr_node.next          # discard node w/ data
+                    self.size -= 1                      # update length
+                return True
 
-        while curr_node.data != None:
-            if curr_node.data == item:
-                break
-            if curr_node.next == None:
-                raise ValueError("Item not found: {}.".format(item))
-            prev_node = curr_node
-            curr_node = curr_node.next
+            prev_node = curr_node                       # update previous node to point to the next node
+            curr_node = curr_node.next                  # update current node to point to the next node
 
-        if curr_node == self.tail:
-            prev_node.next = None
-            self.tail = prev_node
-            self.size -= 1
-            return
-
-        tmp_node = curr_node.next
-        prev_node.next = tmp_node
-        self.size -= 1
+        raise ValueError("Item not found: {}.".format(item))    # Did not find item
 
 def test_linked_list():
     ll = LinkedList()
@@ -203,7 +201,6 @@ def test_linked_list():
         print('head: {}'.format(ll.head))
         print('tail: {}'.format(ll.tail))
         print('length: {}'.format(ll.length()))
-
 
 if __name__ == '__main__':
     test_linked_list()
