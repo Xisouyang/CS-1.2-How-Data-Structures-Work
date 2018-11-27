@@ -135,10 +135,11 @@ class LinkedList(object):
         # TODO: Otherwise raise error to tell user that delete has failed
         # Hint: raise ValueError('Item not found: {}'.format(item))
 
-        if self.is_empty():                         # Checks to see if linked-list is empty
+        if self.is_empty():                             # Checks to see if linked-list is empty
             raise ValueError("Item not found: {}.".format(item))
 
         if self.size == 1:                              # Checks to see if there's only one node in list
+
             # delete that single node from list, update length
             self.head = None
             self.tail = None
@@ -177,6 +178,9 @@ def test_linked_list():
         print('append({!r})'.format(item))
         ll.append(item)
         print('list: {}'.format(ll))
+
+    ll.append(None)
+    print('list: {}'.format(ll))
 
     print('head: {}'.format(ll.head))
     print('tail: {}'.format(ll.tail))
