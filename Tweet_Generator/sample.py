@@ -1,17 +1,15 @@
-'''This program reads in a histogram and returns a random word'''
-
 import sys, random
 from dictionary_words import read_in_txtfile, convert_to_list
 from word_frequency_dict import histogram
 
 
-'''Takes in histogram, returns random word '''
 def get_random_word(histogram):
+    '''Takes in histogram, returns random word '''
     rand_word = random.choice(list(histogram.keys()))
     return rand_word
 
-'''builds a sample dictionary using a list'''
 def get_sample(storage_list):
+    '''builds a sample dictionary using a list'''
 
     '''dictionary'''
     sample_list = {}
@@ -23,10 +21,9 @@ def get_sample(storage_list):
             sample_list[word] += 1
     return sample_list
 
-
-'''This function will return a random word based on a
-weighted probability -use random.randint'''
 def weighted_random_choice(histogram):
+    '''This function will return a random word based on a
+    weighted probability -use random.randint'''
 
     # converts list of keys and values
     words, weights = zip(*histogram.items())
@@ -60,7 +57,7 @@ def test_weighted_randomness(histogram):
     print(weighted_sample)
 
 def main():
-
+    '''This program reads in a histogram and returns a random word'''
     #read in text file, store as list
     txt = read_in_txtfile("short_story.txt")
     txt_list = convert_to_list(txt)
