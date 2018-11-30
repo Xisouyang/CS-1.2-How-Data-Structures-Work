@@ -1,5 +1,5 @@
 #!python
-from linkedlist import LinkedList, Node
+from linkedlist import LinkedList
 
 
 class HashTable(object):
@@ -77,7 +77,6 @@ class HashTable(object):
             return True
         return False
 
-
     def get(self, key):
         """Return the value associated with the given key, or raise KeyError.
         TODO: Running time: O(???) Why and under what conditions?"""
@@ -95,8 +94,6 @@ class HashTable(object):
             return entry[1]
 
         raise KeyError('Key not found: {}'.format(key))
-
-
 
     def set(self, key, value):
         """Insert or update the given key with its associated value.

@@ -56,7 +56,12 @@ class LinkedList(object):
 
     def length(self):
         """Return the length of this linked list by traversing its nodes.
-        TODO: Running time: O(???) Why and under what conditions?"""
+        TODO: Running time: O(???) Why and under what conditions?
+
+        Best and Worst case: O(1) - This implementation increments size property
+        each time an element is added. Thus, this function simply needs to return
+        that property - 1 operation
+        """
         # TODO: Loop through all nodes and count one for each
 
         return self.size            # Returns the length of linked-list(size == length)
@@ -71,7 +76,13 @@ class LinkedList(object):
 
     def append(self, item):
         """Insert the given item at the tail of this linked list.
-        TODO: Running time: O(???) Why and under what conditions?"""
+
+        TODO: Running time: O(???) Why and under what conditions?
+
+        Best and Worst case: O(1) - This linkedlist implementation has tail property,
+        so this function simply adds a new node after the tail, and updates the tail pointer.
+
+        """
         # TODO: Create new node to hold given item
         # TODO: Append node after tail, if it exists
 
@@ -95,7 +106,11 @@ class LinkedList(object):
 
     def prepend(self, item):
         """Insert the given item at the head of this linked list.
-        TODO: Running time: O(???) Why and under what conditions?"""
+        TODO: Running time: O(???) Why and under what conditions?
+
+        Best and Worst case: O(1) - Same algorithm as append function,
+        but instead of looking at the tail property we look at the head.
+        """
         # TODO: Create new node to hold given item
         # TODO: Prepend node before head, if it exists
 
@@ -128,8 +143,15 @@ class LinkedList(object):
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
+
         TODO: Best case running time: O(???) Why and under what conditions?
-        TODO: Worst case running time: O(???) Why and under what conditions?"""
+        TODO: Worst case running time: O(???) Why and under what conditions?
+
+        Best Case: O(1) - find item at the head and delete, only do 1 operation
+        Worst Case: O(n) - item does not exist in the linked-list, and goes through
+        entire list to try - takes n operations
+
+        """
         # TODO: Loop through all nodes to find one whose data matches given item
         # TODO: Update previous node to skip around node with matching data
         # TODO: Otherwise raise error to tell user that delete has failed
