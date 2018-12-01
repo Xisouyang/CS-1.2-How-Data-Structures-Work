@@ -129,7 +129,13 @@ class LinkedList(object):
     def find(self, quality):
         """Return an item from this linked list satisfying the given quality.
         TODO: Best case running time: O(???) Why and under what conditions?
-        TODO: Worst case running time: O(???) Why and under what conditions?"""
+        TODO: Worst case running time: O(???) Why and under what conditions?
+
+        Best Case: O(1) - find item at or near head, few to 1 operation
+        Worst Case: O(n) - item is close to or at the end or does not exist in
+        list - must traverse through entire list - n operations
+
+        """
         # TODO: Loop through all nodes to find item where quality(item) is True
         # TODO: Check if node's data satisfies given quality function
 
