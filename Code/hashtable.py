@@ -57,7 +57,8 @@ class HashTable(object):
     def items(self):
         """Return a list of all items (key-value pairs) in this hash table.
         TODO: Running time: O(???) Why and under what conditions?
-        Best and Worst Case: O(n * l) - must iterate through each bucket, and for
+
+        Best and Worst Case: O(n) - must iterate through each bucket, and for
         each bucket iterate through all key value pairs within that bucket's
         linked-list.
         """
@@ -70,6 +71,7 @@ class HashTable(object):
     def length(self):
         """Return the number of key-value entries by traversing its buckets.
         TODO: Running time: O(???) Why and under what conditions?
+
         Best and Worst Case: O(1) - This implentation keeps a running count of
         entries within the hashtable. Thus we only need to return that count.
         """
@@ -120,7 +122,7 @@ class HashTable(object):
     def set(self, key, value):
         """Insert or update the given key with its associated value.
         TODO: Running time: O(???) Why and under what conditions?
-        
+
         Same runtime explanation as get function, only difference is a
         few extra constant operations, which does not change runtime.
         """
@@ -141,7 +143,6 @@ class HashTable(object):
             bucket.delete(entry)
             bucket.append(newNode)
 
-
     def delete(self, key):
         """Delete the given key from this hash table, or raise KeyError.
         TODO: Running time: O(???) Why and under what conditions?
@@ -158,7 +159,6 @@ class HashTable(object):
         index = self._bucket_index(key)
         bucket = self.buckets[index]
         entry = bucket.find(lambda node_key: node_key[0] == key)
-
         if entry:
             bucket.delete(entry)
             self.size -= 1
@@ -185,7 +185,7 @@ def test_hash_table():
     print('length: {}'.format(ht.length()))
 
     # Enable this after implementing delete method
-    delete_implemented = False
+    delete_implemented = True
     if delete_implemented:
         print('\nTesting delete:')
         for key in ['I', 'V', 'X']:

@@ -12,7 +12,6 @@ class Node(object):
         """Return a string representation of this node."""
         return 'Node({!r})'.format(self.data)
 
-
 class LinkedList(object):
 
     def __init__(self, items=None):
