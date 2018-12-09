@@ -1,5 +1,7 @@
 import sys, random, string
 from dictogram import Dictogram
+sys.path.insert(0, '../Tweet_Generator')
+from sample import weighted_random_choice
 
 class markov(dict):
 
@@ -13,7 +15,7 @@ class markov(dict):
 
         # Create method to walk through word list, creating tuple of words based on order
         # Find every word that comes after that tuple sequence(our key) - save to Dictogram
-        #
+
     def create_markov_model(self, word_list):
 
         order = self.order
@@ -28,11 +30,31 @@ class markov(dict):
 
     def check_key(self, key, value):
         if key in self:
-            print("here")
             self[key].add_count(value)
         else:
             self[key] = Dictogram([value])
 
+    #TODO: Generate Sentence using Markov Model
+    def generate_sentence(self, txt_list, count=10):
+
+        # Find random key
+
+        rand_string = ""
+        rand_key = random.choice(list(self))
+        rand_followup = weighted_random_choice(self[rand_key])
+        rand_string = rand_string + ' '.join(rand_key) + ' ' + rand_followup + ' '
+
+        # add follow-up word to tuple, chop off head
+        for i in range(count - self.order - 1):
+
+            tmp_list = list(rand_key)
+            tmp_list.append(rand_followup)
+            tmp_list = tmp_list[1:]
+            rand_key = tuple(tmp_list)
+            rand_followup = weighted_random_choice(self[rand_key])
+            rand_string = rand_string + " " + rand_followup
+
+        print(rand_string)
 
 def read_in_txtfile(text):
     '''reads in from text file and saves to an array'''
@@ -48,13 +70,9 @@ def convert_to_list(text_string):
 def main():
     txtfile = read_in_txtfile("story.txt")
     txt_list = convert_to_list(txtfile)
-    markov_chain = markov(txt_list, 2)
+    markov_chain = markov(txt_list, 5)
     markov_chain.create_markov_model(txt_list)
+    markov_chain.generate_sentence(txt_list, 30)
 
 if __name__ == '__main__':
     main()
-
-
-
-
-    #TODO: Generate Sentence using Markov Model
