@@ -11,11 +11,6 @@ class markov(dict):
 
         self.order = order
 
-    #TODO: Create Markov Model
-
-        # Create method to walk through word list, creating tuple of words based on order
-        # Find every word that comes after that tuple sequence(our key) - save to Dictogram
-
     def create_markov_model(self, word_list):
 
         order = self.order
@@ -26,23 +21,19 @@ class markov(dict):
             value = word_list[i + order]
             self.check_key(key, value)
 
-        print(self)
-
     def check_key(self, key, value):
         if key in self:
             self[key].add_count(value)
         else:
             self[key] = Dictogram([value])
 
-    #TODO: Generate Sentence using Markov Model
     def generate_sentence(self, txt_list, count=10):
 
         # Find random key
-
         rand_string = ""
         rand_key = random.choice(list(self))
         rand_followup = weighted_random_choice(self[rand_key])
-        rand_string = rand_string + ' '.join(rand_key) + ' ' + rand_followup + ' '
+        rand_string = rand_string + ' '.join(rand_key) + ' ' + rand_followup
 
         # add follow-up word to tuple, chop off head
         for i in range(count - self.order - 1):
@@ -51,10 +42,20 @@ class markov(dict):
             tmp_list.append(rand_followup)
             tmp_list = tmp_list[1:]
             rand_key = tuple(tmp_list)
-            rand_followup = weighted_random_choice(self[rand_key])
+
+            try:
+                rand_followup = weighted_random_choice(self[rand_key])
+            except KeyError:
+                rand_key = random.choice(list(self))
+                rand_followup = weighted_random_choice(self[rand_key])
+
+            while rand_followup == None:
+                rand_followup = weighted_random_choice(self[rand_key])
+                print(rand_followup)
+
             rand_string = rand_string + " " + rand_followup
 
-        print(rand_string)
+        return rand_string
 
 def read_in_txtfile(text):
     '''reads in from text file and saves to an array'''
@@ -64,15 +65,17 @@ def read_in_txtfile(text):
 
 def convert_to_list(text_string):
     '''Takes in string of text, converts to and returns a list'''
-    word_bank = text_string.split()
-    return word_bank
+    word_list = text_string.split()
+    return word_list
 
 def main():
-    txtfile = read_in_txtfile("story.txt")
+    txtfile = read_in_txtfile("lord.txt")
     txt_list = convert_to_list(txtfile)
-    markov_chain = markov(txt_list, 5)
+    markov_chain = markov(txt_list, 2)
     markov_chain.create_markov_model(txt_list)
-    markov_chain.generate_sentence(txt_list, 30)
+    string = markov_chain.generate_sentence(txt_list, 50)
+
+    return string
 
 if __name__ == '__main__':
     main()
