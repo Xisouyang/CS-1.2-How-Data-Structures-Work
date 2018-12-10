@@ -6,7 +6,7 @@
    USAGE: python3 ./word_frequency_dict.py'''
 
 import sys, string
-from dictionary_words import read_in_txtfile, convert_to_list
+from Tweet_Generator.dictionary_words import read_in_txtfile, convert_to_list
 
 '''Takes in a list of text, returns a histogram as a dictionary'''
 def histogram(source_text):

@@ -1,5 +1,5 @@
 import sys
-from dictionary_words import read_in_txtfile, convert_to_list
+from Tweet_Generator.dictionary_words import read_in_txtfile, convert_to_list
 
 '''Takes in a list of text, returns a histogram as a list of tuples'''
 def histogram(source_text):
