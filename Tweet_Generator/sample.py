@@ -1,6 +1,6 @@
 import sys, random
 from Tweet_Generator.dictionary_words import read_in_txtfile, convert_to_list
-from word_frequency_dict import histogram
+from Tweet_Generator.word_frequency_dict import histogram
 
 
 def get_random_word(histogram):
