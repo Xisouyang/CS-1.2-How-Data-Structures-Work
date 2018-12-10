@@ -1,7 +1,7 @@
 import sys, random, string
 from dictogram import Dictogram
 sys.path.insert(0, '../Tweet_Generator')
-from sample import weighted_random_choice
+from Tweet_Generator.sample import weighted_random_choice
 
 class markov(dict):
 
@@ -69,7 +69,7 @@ def convert_to_list(text_string):
     return word_list
 
 def main():
-    txtfile = read_in_txtfile("lord.txt")
+    txtfile = read_in_txtfile("./Tweet_Generator/lord.txt")
     txt_list = convert_to_list(txtfile)
     markov_chain = markov(txt_list, 3)
     markov_chain.create_markov_model(txt_list)
