@@ -1,6 +1,6 @@
 import sys, random
-from Tweet_Generator.sample import weighted_random_choice
-from Tweet_Generator.dictionary_words import read_in_txtfile, convert_to_list
+from Tweet_Generator import sample
+from Tweet_Generator import dictionary_words
 
 from flask import Flask, render_template
 from Code import markov_chain_v2
