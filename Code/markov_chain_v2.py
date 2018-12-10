@@ -71,9 +71,9 @@ def convert_to_list(text_string):
 def main():
     txtfile = read_in_txtfile("lord.txt")
     txt_list = convert_to_list(txtfile)
-    markov_chain = markov(txt_list, 2)
+    markov_chain = markov(txt_list, 3)
     markov_chain.create_markov_model(txt_list)
-    string = markov_chain.generate_sentence(txt_list, 50)
+    string = markov_chain.generate_sentence(txt_list, 30)
 
     return string
 

@@ -3,9 +3,17 @@
         <title>Lord of the Rings</title>
         <!-- Need this line so app can use css file -->
         <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+
+        <div id="header">
+            <h1>
+                Lord of the Rings
+            </h1>
+        </div>
     </head>
 
     <body>
-        <h1>{{sentence}}</h1>
+        <div id="quote">
+            <h2>{{sentence}}</h2>
+        </div>
     </body>
 </html>

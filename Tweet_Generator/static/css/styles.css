@@ -1,4 +1,42 @@
 body
 {
-    background-color:blue;
+    background-image: url("lord.jpg");
+}
+
+#quote
+{
+    display: flex;
+    width: 50%;
+    height: 100%;
+    margin: auto;
+
+    animation-name: fadeIn;
+    animation-duration: 4s;
+
+    font-family: cursive;
+}
+
+h2
+{
+    margin: auto; /* Important */
+    text-align: center;
+    margin-top: 30%;
+}
+
+h1
+{
+    text-align: center;
+    margin-top: 3%;
+}
+
+
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
