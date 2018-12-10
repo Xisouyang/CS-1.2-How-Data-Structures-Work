@@ -1,5 +1,5 @@
 import sys, random
-from dictionary_words import read_in_txtfile, convert_to_list
+from Tweet_Generator.dictionary_words import read_in_txtfile, convert_to_list
 from word_frequency_dict import histogram
 
 
