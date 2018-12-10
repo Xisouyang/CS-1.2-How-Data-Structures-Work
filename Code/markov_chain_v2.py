@@ -1,5 +1,5 @@
 import sys, random, string
-from dictogram import Dictogram
+from Code.dictogram import Dictogram
 sys.path.insert(0, '../Tweet_Generator')
 from Tweet_Generator.sample import weighted_random_choice
 
