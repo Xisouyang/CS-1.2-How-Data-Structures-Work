@@ -7,10 +7,11 @@ from Code import markov_chain_v2
 
 app = Flask(__name__)
 
-@app.route("/")
+markov = markov_chain_v2.main()
 
+@app.route("/")
 def main():
 
-    sentence_string = markov_chain_v2.main()
+    sentence_string = markov.generate_sentence(30)
 
     return render_template("main.html", sentence = sentence_string)

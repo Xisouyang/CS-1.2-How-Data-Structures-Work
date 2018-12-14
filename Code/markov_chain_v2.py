@@ -3,11 +3,11 @@ from Code.dictogram import Dictogram
 sys.path.insert(0, '../Tweet_Generator')
 from Tweet_Generator.sample import weighted_random_choice
 
-class markov(dict):
+class Markov(dict):
 
     def __init__(self, word_list=None, order=1):
         ''' markov class initialization'''
-        super(markov, self).__init__()
+        super(Markov, self).__init__()
 
         self.order = order
 
@@ -27,7 +27,7 @@ class markov(dict):
         else:
             self[key] = Dictogram([value])
 
-    def generate_sentence(self, txt_list, count=10):
+    def generate_sentence(self, count=10):
 
         # Find random key
         rand_string = ""
@@ -43,12 +43,14 @@ class markov(dict):
             tmp_list = tmp_list[1:]
             rand_key = tuple(tmp_list)
 
+            # Handle KeyError
             try:
                 rand_followup = weighted_random_choice(self[rand_key])
             except KeyError:
                 rand_key = random.choice(list(self))
                 rand_followup = weighted_random_choice(self[rand_key])
 
+                # Edge Case
             while rand_followup == None:
                 rand_followup = weighted_random_choice(self[rand_key])
                 print(rand_followup)
@@ -71,11 +73,11 @@ def convert_to_list(text_string):
 def main():
     txtfile = read_in_txtfile("./Tweet_Generator/lord.txt")
     txt_list = convert_to_list(txtfile)
-    markov_chain = markov(txt_list, 3)
+    markov_chain = Markov(txt_list, 3)
     markov_chain.create_markov_model(txt_list)
-    string = markov_chain.generate_sentence(txt_list, 30)
+    # string = markov_chain.generate_sentence(30)
 
-    return string
+    return markov_chain
 
 if __name__ == '__main__':
     main()
